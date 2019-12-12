@@ -3,7 +3,7 @@ pipeline {
     node {
       label 'master'
     }
-    
+
   }
   stages {
     stage('Build') {
@@ -11,14 +11,16 @@ pipeline {
         withMaven(maven: 'M3') {
           sh 'mvn clean install'
         }
-        
+
       }
     }
+
     stage('Results') {
       steps {
         junit '**/target/surefire-reports/TEST-*.xml'
         archiveArtifacts 'target/*.jar'
       }
     }
+
   }
 }
